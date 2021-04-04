@@ -1,12 +1,12 @@
 [package]
 
 name = "mime_guess"
-version = "2.0.3"
-authors = ["Austin Bonander <austin.bonander@gmail.com>"]
+version = "2.0.4"
+authors = ["Austin Bonander <austin.bonander@gmail.com>", "Lynnesbian <lynne@bune.city>"]
 license = "MIT"
 description = "A simple crate for detection of a file's MIME type by its extension."
 keywords = ["mime", "filesystem", "extension"]
-repository = "https://github.com/abonander/mime_guess"
+repository = "https://github.com/Lynnesbian/mime_guess"
 documentation = "https://docs.rs/mime_guess/"
 readme = "README.md"
 
@@ -23,21 +23,19 @@ rev-mappings = []
 mime = "0.3"
 unicase = "2.4.0"
 
-#[dependencies.phf]
-## version = "0.7.24"
-## git = "https://github.com/sfackler/rust-phf"
-#path = "../rust-phf/phf"
-#features = ["unicase"]
-#optional = true
+# [dependencies.phf]
+# version = "0.8.0"
+# features = ["unicase"]
+# optional = true
 
 [build-dependencies]
 unicase = "2.4.0"
 
-#[build-dependencies.phf_codegen]
-#version = "0.7.24"
+# [build-dependencies.phf_codegen]
+# version = "0.8.0"
 #git = "https://github.com/sfackler/rust-phf"
 #path = "../rust-phf/phf_codegen"
-#optional = true
+# optional = true
 
 [dev-dependencies]
 criterion = "0.3"
