@@ -140,7 +140,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("buffer", &["application/octet-stream"]),
     ("bz", &["application/x-bzip"]),
     ("bz2", &["application/x-bzip2"]),
-    ("c", &["text/x-c"]),
+    ("c", &["text/x-c", "text/x-csrc"]),
     ("c11amc", &["application/vnd.cluetrust.cartomobile-config"]),
     (
         "c11amz",
@@ -218,7 +218,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("contact", &["text/x-ms-contact"]),
     ("coverage", &["application/xml"]),
     ("cpio", &["application/x-cpio"]),
-    ("cpp", &["text/plain", "text/x-c"]),
+    ("cpp", &["text/plain", "text/x-c", "text/x-csrc", "text/c++src"]),
     ("cpt", &["application/mac-compactpro"]),
     ("crd", &["application/x-mscardfile"]),
     ("crl", &["application/pkix-crl"]),
