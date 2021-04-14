@@ -1105,7 +1105,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("scd", &["application/x-msschedule"]),
     ("scm", &["application/vnd.lotus-screencam"]),
     ("scq", &["application/scvp-cv-request"]),
-    ("scr", &["text/plain"]),
+    ("scr", &["application/x-ms-dos-executable", "application/x-dosexec", "text/plain"]),
     ("scs", &["application/scvp-cv-response"]),
     ("scss", &["text/x-scss"]),
     ("sct", &["text/scriptlet"]),
