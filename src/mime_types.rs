@@ -1079,6 +1079,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("roa", &["application/rpki-roa"]),
     ("roff", &["text/troff"]),
     ("rp9", &["application/vnd.cloanto.rp9"]),
+    ("rpa", &["application/x-rpa"]),
     ("rpm", &["application/x-rpm", "application/x-redhat-package-manager", "audio/x-pn-realaudio-plugin"]),
     ("rpss", &["application/vnd.nokia.radio-presets"]),
     ("rpst", &["application/vnd.nokia.radio-preset"]),
