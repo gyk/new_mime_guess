@@ -531,7 +531,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("img", &["application/octet-stream"]),
     ("imp", &["application/vnd.accpac.simply.imp"]),
     ("ims", &["application/vnd.ms-ims"]),
-    ("in", &["text/plain"]),
+    ("in", &["text/plain", "application/xml"]),
     ("inc", &["text/plain"]),
     ("inf", &["application/octet-stream"]),
     ("ini", &["text/plain"]),
