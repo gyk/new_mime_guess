@@ -3,3 +3,4 @@ target
 src/mime_types_generated.rs
 .idea/
 *.iml
+*.sh

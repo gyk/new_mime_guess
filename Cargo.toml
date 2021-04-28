@@ -9,6 +9,7 @@ keywords = ["mime", "filesystem", "extension"]
 repository = "https://github.com/Lynnesbian/mime_guess"
 documentation = "https://docs.rs/new_mime_guess/"
 readme = "README.md"
+exclude = ["*.sh"]
 
 [features]
 default = ["rev-mappings"]
