@@ -4,7 +4,11 @@ new_mime_guess
 
 This project is a fork of [mime_guess](https://github.com/abonander/mime_guess). It adds support for many new file
 formats, and is modified to fix issues I've identified with its MIME/extension associations while writing
-[fif](https://crates.io/crates/fif). The original README is preserved below.
+[fif](https://crates.io/crates/fif).
+
+The minimum supported Rust version is now **1.36**.
+
+The original README is preserved below.
 
 ---
 

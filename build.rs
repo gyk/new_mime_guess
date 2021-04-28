@@ -112,7 +112,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
         rev_map.build()
     ).unwrap();
 
-    writeln!(out, "const EXTS: &'static [&'static str] = &{:?};", exts).unwrap();
+    writeln!(out, "const EXTS: &[&str] = &{:?};", exts).unwrap();
 }
 
 #[cfg(all(not(feature = "phf"), feature = "rev-mappings"))]
@@ -131,7 +131,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
 
     let dyn_map = get_rev_mappings();
 
-    write!(out, "static REV_MAPPINGS: &'static [(UniCase<&'static str>, TopLevelExts)] = &[").unwrap();
+    write!(out, "static REV_MAPPINGS: &[(UniCase<&'static str>, TopLevelExts)] = &[").unwrap();
 
     let mut exts = Vec::new();
 
@@ -163,7 +163,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
 
     writeln!(out, "];").unwrap();
 
-    writeln!(out, "const EXTS: &'static [&'static str] = &{:?};", exts).unwrap();
+    writeln!(out, "const EXTS: &[&str] = &{:?};", exts).unwrap();
 }
 
 #[cfg(feature = "rev-mappings")]

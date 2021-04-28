@@ -29,7 +29,7 @@ pub fn get_extensions(toplevel: &str, sublevel: &str) -> Option<&'static [&'stat
         return Some(&EXTS[top.start..top.end]);
     }
 
-    let sub = map_lookup(&top.subs, sublevel)?;
+    let sub = map_lookup(top.subs, sublevel)?;
     Some(&EXTS[sub.0..sub.1])
 }
 

@@ -5,7 +5,7 @@
 //! ```
 //! # extern crate mime;
 //! // the file doesn't have to exist, it just looks at the path
-//! let guess = mime_guess::from_path("some_file.gif");
+//! let guess = new_mime_guess::from_path("some_file.gif");
 //! assert_eq!(guess.first(), Some(mime::IMAGE_GIF));
 //!
 //! ```
@@ -60,12 +60,12 @@ impl MimeGuess {
     ///
     /// If `ext` is empty or has no (currently) known MIME type mapping, then an empty guess is
     /// returned.
-    pub fn from_ext(ext: &str) -> MimeGuess {
+    pub fn from_ext(ext: &str) -> Self {
         if ext.is_empty() {
-            return MimeGuess(&[]);
+            return Self(&[]);
         }
 
-        impl_::get_mime_types(ext).map_or(MimeGuess(&[]), |v| MimeGuess(v))
+        impl_::get_mime_types(ext).map_or(Self(&[]), |v| Self(v))
     }
 
     /// Guess the MIME type of `path` by its extension (as defined by
@@ -83,11 +83,11 @@ impl MimeGuess {
     /// Take care when processing files with assumptions based on the return value of this function.
     ///
     /// [`Path::extension()`]: https://doc.rust-lang.org/std/path/struct.Path.html#method.extension
-    pub fn from_path<P: AsRef<Path>>(path: P) -> MimeGuess {
+    pub fn from_path<P: AsRef<Path>>(path: P) -> Self {
         path.as_ref()
             .extension()
             .and_then(OsStr::to_str)
-            .map_or(MimeGuess(&[]), Self::from_ext)
+            .map_or(Self(&[]), Self::from_ext)
     }
 
     /// `true` if the guess did not return any known mappings for the given path or extension.
