@@ -1,13 +1,13 @@
 [package]
 
-name = "mime_guess"
+name = "new_mime_guess"
 version = "2.0.4"
 authors = ["Austin Bonander <austin.bonander@gmail.com>", "Lynnesbian <lynne@bune.city>"]
 license = "MIT"
-description = "A simple crate for detection of a file's MIME type by its extension."
+description = "A simple crate for associating MIME types to file extensions."
 keywords = ["mime", "filesystem", "extension"]
 repository = "https://github.com/Lynnesbian/mime_guess"
-documentation = "https://docs.rs/mime_guess/"
+documentation = "https://docs.rs/new_mime_guess/"
 readme = "README.md"
 
 [features]
