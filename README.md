@@ -1,3 +1,13 @@
+new_mime_guess
+===
+[![Crates.io](https://img.shields.io/crates/v/new_mime_guess.svg)](https://crates.io/crates/new_mime_guess)
+
+This project is a fork of [mime_guess](https://github.com/abonander/mime_guess). It adds support for many new file
+formats, and is modified to fix issues I've identified with its MIME/extension associations while writing
+[fif](https://crates.io/crates/fif). The original README is preserved below.
+
+---
+
 # mime_guess ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/abonander/mime_guess/Rust) [![Crates.io](https://img.shields.io/crates/v/mime_guess.svg)](https://crates.io/crates/mime_guess)
 
 MIME/MediaType guessing by file extension. 
