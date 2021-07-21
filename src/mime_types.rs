@@ -460,7 +460,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("gv", &["text/vnd.graphviz"]),
     ("gxf", &["application/gxf"]),
     ("gxt", &["application/vnd.geonext"]),
-    ("gz", &["application/gzip", "application/x-gzip"]),
+    ("gz", &["application/gzip", "application/gzip"]),
     ("h", &["text/plain"]),
     ("h261", &["video/h261"]),
     ("h263", &["video/h263"]),
