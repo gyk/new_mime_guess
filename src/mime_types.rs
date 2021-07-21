@@ -822,6 +822,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
     ("nnd", &["application/vnd.noblenet-directory"]),
     ("nns", &["application/vnd.noblenet-sealer"]),
     ("nnw", &["application/vnd.noblenet-web"]),
+    ("nq", &["application/n-quads"]),
     ("npx", &["image/vnd.net-fpx"]),
     ("nq", &["application/x-conference", "application/n-quads"]),
     ("nsc", &["video/x-ms-asf"]),
