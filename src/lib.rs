@@ -3,7 +3,6 @@
 //! Uses a static list of file-extension : MIME type mappings.
 //!
 //! ```
-//! # extern crate mime;
 //! // the file doesn't have to exist, it just looks at the path
 //! let guess = new_mime_guess::from_path("some_file.gif");
 //! assert_eq!(guess.first(), Some(mime::IMAGE_GIF));
@@ -42,7 +41,7 @@ mod impl_;
 /// ### Note: Ordering
 /// A given file format may have one or more applicable Media Types; in this case
 /// the first Media Type returned is whatever is declared in the latest IETF RFC for the
-/// presumed file format or the one that explicitly supercedes all others.
+/// presumed file format or the one that explicitly supersedes all others.
 /// Ordering of additional Media Types is arbitrary.
 ///
 /// ### Note: Values Not Stable
@@ -274,95 +273,6 @@ pub fn from_path<P: AsRef<Path>>(path: P) -> MimeGuess {
 	MimeGuess::from_path(path)
 }
 
-/// Guess the MIME type of `path` by its extension (as defined by `Path::extension()`).
-///
-/// If `path` has no extension, or its extension has no known MIME type mapping,
-/// then the MIME type is assumed to be `application/octet-stream`.
-///
-/// ## Note
-/// **Guess** is the operative word here, as there are no guarantees that the contents of the file
-/// that `path` points to match the MIME type associated with the path's extension.
-///
-/// Take care when processing files with assumptions based on the return value of this function.
-///
-/// In HTTP applications, it might be [preferable][rfc7231] to not send a `Content-Type`
-/// header at all instead of defaulting to `application/octet-stream`.
-///
-/// [rfc7231]: https://tools.ietf.org/html/rfc7231#section-3.1.1.5
-#[deprecated(
-since = "2.0.0",
-note = "Use `from_path(path).first_or_octet_stream()` instead"
-)]
-pub fn guess_mime_type<P: AsRef<Path>>(path: P) -> Mime {
-	from_path(path).first_or_octet_stream()
-}
-
-/// Guess the MIME type of `path` by its extension (as defined by `Path::extension()`).
-///
-/// If `path` has no extension, or its extension has no known MIME type mapping,
-/// then `None` is returned.
-///
-#[deprecated(since = "2.0.0", note = "Use `from_path(path).first()` instead")]
-pub fn guess_mime_type_opt<P: AsRef<Path>>(path: P) -> Option<Mime> {
-	from_path(path).first()
-}
-
-/// Guess the MIME type string of `path` by its extension (as defined by `Path::extension()`).
-///
-/// If `path` has no extension, or its extension has no known MIME type mapping,
-/// then `None` is returned.
-///
-/// ## Note
-/// **Guess** is the operative word here, as there are no guarantees that the contents of the file
-/// that `path` points to match the MIME type associated with the path's extension.
-///
-/// Take care when processing files with assumptions based on the return value of this function.
-#[deprecated(since = "2.0.0", note = "Use `from_path(path).first_raw()` instead")]
-pub fn mime_str_for_path_ext<P: AsRef<Path>>(path: P) -> Option<&'static str> {
-	from_path(path).first_raw()
-}
-
-/// Get the MIME type associated with a file extension.
-///
-/// If there is no association for the extension, or `ext` is empty,
-/// `application/octet-stream` is returned.
-///
-/// ## Note
-/// In HTTP applications, it might be [preferable][rfc7231] to not send a `Content-Type`
-/// header at all instead of defaulting to `application/octet-stream`.
-///
-/// [rfc7231]: https://tools.ietf.org/html/rfc7231#section-3.1.1.5
-#[deprecated(
-since = "2.0.0",
-note = "use `from_ext(search_ext).first_or_octet_stream()` instead"
-)]
-pub fn get_mime_type(search_ext: &str) -> Mime {
-	from_ext(search_ext).first_or_octet_stream()
-}
-
-/// Get the MIME type associated with a file extension.
-///
-/// If there is no association for the extension, or `ext` is empty,
-/// `None` is returned.
-#[deprecated(since = "2.0.0", note = "use `from_ext(search_ext).first()` instead")]
-pub fn get_mime_type_opt(search_ext: &str) -> Option<Mime> {
-	from_ext(search_ext).first()
-}
-
-/// Get the MIME type string associated with a file extension. Case-insensitive.
-///
-/// If `search_ext` is not already lowercase,
-/// it will be converted to lowercase to facilitate the search.
-///
-/// Returns `None` if `search_ext` is empty or an associated extension was not found.
-#[deprecated(
-since = "2.0.0",
-note = "use `from_ext(search_ext).first_raw()` instead"
-)]
-pub fn get_mime_type_str(search_ext: &str) -> Option<&'static str> {
-	from_ext(search_ext).first_raw()
-}
-
 /// Get a list of known extensions for a given `Mime`.
 ///
 /// Ignores parameters (only searches with `<main type>/<subtype>`). Case-insensitive (for extension types).
@@ -421,20 +331,11 @@ pub fn get_extensions(toplevel: &str, sublevel: &str) -> Option<&'static [&'stat
 	impl_::get_extensions(toplevel, sublevel)
 }
 
-/// Get the MIME type for `application/octet-stream` (generic binary stream)
-#[deprecated(since = "2.0.0", note = "use `mime::APPLICATION_OCTET_STREAM` instead")]
-pub fn octet_stream() -> Mime {
-	"application/octet-stream".parse().unwrap()
-}
-
 #[cfg(test)]
 mod tests {
 	include!("mime_types.rs");
 
 	use super::{expect_mime, from_ext, from_path, get_mime_extensions_str};
-	#[allow(deprecated, unused_imports)]
-	use std::ascii::AsciiExt;
-
 	use std::fmt::Debug;
 	use std::path::Path;
 
