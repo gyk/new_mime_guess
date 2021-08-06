@@ -18,6 +18,7 @@
 //! type. The file that may or may not reside at that path may or may not be a valid file of the
 //! returned MIME type.  Be wary of unsafe or un-validated assumptions about file structure or
 //! length.
+#[forbid(unsafe_code)]
 mod mime_types;
 
 pub use mime::Mime;

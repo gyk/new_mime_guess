@@ -1,14 +1,19 @@
 new_mime_guess
 ===
 [![Crates.io](https://img.shields.io/crates/v/new_mime_guess.svg)](https://crates.io/crates/new_mime_guess)
+[![Unsafe forbidden](https://img.shields.io/badge/unsafe-forbidden-success.svg?style=flat-square)
+](https://github.com/rust-secure-code/safety-dance/)
 
 This project is a fork of [mime_guess](https://github.com/abonander/mime_guess). It adds support for many new file
-formats, and is modified to fix issues I've identified with its MIME/extension associations while writing
-[fif](https://crates.io/crates/fif).
+formats, uses Rust's 2018 edition, and fixes mime_guess' currently disabled `phf-map` feature. It has a few other minor
+changes, but my main reason for creating it is to fix some gaps/issues I've identified with its MIME/extension
+associations while writing [fif](https://gitlab.com/lynnesbian/fif).
 
-The minimum supported Rust version is now **1.40**.
+As of 3.0, the minimum supported Rust version is **1.40**. Additionally, the functions marked as deprecated in
+mime_guess' 2.0 release have been removed, along with the `pub extern crate mime` declaration, meaning that you can no
+longer `use new_mime_guess::mime`.
 
-The original README is preserved below.
+The 1original README is preserved below.
 
 ---
 
