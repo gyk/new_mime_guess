@@ -17,6 +17,8 @@
 /// Sourced from:
 /// https://github.com/samuelneff/MimeTypeMap/blob/master/MimeTypeMap.cs
 /// https://github.com/jshttp/mime-db extracted with https://gist.github.com/soyuka/b7e29d359b2c14c21bdead923c01cc81
+
+#[allow(dead_code)]
 pub static MIME_TYPES: &[(&str, &[&str])] = &[
 	("123", &["application/vnd.lotus-1-2-3"]),
 	("1km", &["application/vnd.1000minds.decision-model+xml"]),

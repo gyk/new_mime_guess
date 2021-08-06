@@ -19,7 +19,6 @@
 //! type. The file that may or may not reside at that path may or may not be a valid file of the
 //! returned MIME type.  Be wary of unsafe or un-validated assumptions about file structure or
 //! length.
-pub extern crate mime;
 mod mime_types;
 
 pub use mime::Mime;
@@ -29,11 +28,11 @@ use std::iter::FusedIterator;
 use std::path::Path;
 use std::{iter, slice};
 
-#[cfg(feature = "phf")]
+#[cfg(feature = "phf-map")]
 #[path = "impl_phf.rs"]
 mod impl_;
 
-#[cfg(not(feature = "phf"))]
+#[cfg(not(feature = "phf-map"))]
 #[path = "impl_bin_search.rs"]
 mod impl_;
 

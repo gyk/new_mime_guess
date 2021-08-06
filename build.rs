@@ -1,9 +1,5 @@
-#[cfg(feature = "phf")]
-extern crate phf_codegen;
-
 use unicase::UniCase;
 
-use std::env;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufWriter;
@@ -15,15 +11,15 @@ use mime_types::MIME_TYPES;
 #[path = "src/mime_types.rs"]
 mod mime_types;
 
-#[cfg(feature = "phf")]
-const PHF_PATH: &str = "::impl_::phf";
+#[cfg(feature = "phf-map")]
+const PHF_PATH: &str = "phf";
 
 fn main() {
-	let out_dir = env::var("OUT_DIR").unwrap();
+	let out_dir = std::env::var("OUT_DIR").unwrap();
 	let dest_path = Path::new(&out_dir).join("mime_types_generated.rs");
 	let mut outfile = BufWriter::new(File::create(dest_path).unwrap());
 
-	#[cfg(feature = "phf")]
+	#[cfg(feature = "phf-map")]
 		build_forward_map(&mut outfile);
 
 	#[cfg(feature = "rev-mappings")]
@@ -31,7 +27,7 @@ fn main() {
 }
 
 // Build forward mappings (ext -> mime type)
-#[cfg(feature = "phf")]
+#[cfg(feature = "phf-map")]
 fn build_forward_map<W: Write>(out: &mut W) {
 	use phf_codegen::Map as PhfMap;
 
@@ -63,12 +59,11 @@ fn build_forward_map<W: Write>(out: &mut W) {
 		out,
 		"static MIME_TYPES: phf::Map<UniCase<&'static str>, &'static [&'static str]> = \n{};",
 		forward_map.build()
-	)
-		.unwrap();
+	).unwrap();
 }
 
 // Build reverse mappings (mime type -> ext)
-#[cfg(all(feature = "phf", feature = "rev-mappings"))]
+#[cfg(all(feature = "phf-map", feature = "rev-mappings"))]
 fn build_rev_map<W: Write>(out: &mut W) {
 	use phf_codegen::Map as PhfMap;
 
@@ -113,7 +108,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
 	writeln!(out, "const EXTS: &[&str] = &{:?};", exts).unwrap();
 }
 
-#[cfg(all(not(feature = "phf"), feature = "rev-mappings"))]
+#[cfg(all(not(feature = "phf-map"), feature = "rev-mappings"))]
 fn build_rev_map<W: Write>(out: &mut W) {
 	use std::fmt::Write as _;
 
