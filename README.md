@@ -6,7 +6,7 @@ This project is a fork of [mime_guess](https://github.com/abonander/mime_guess).
 formats, and is modified to fix issues I've identified with its MIME/extension associations while writing
 [fif](https://crates.io/crates/fif).
 
-The minimum supported Rust version is now **1.36**.
+The minimum supported Rust version is now **1.40**.
 
 The original README is preserved below.
 
