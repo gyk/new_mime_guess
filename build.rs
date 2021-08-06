@@ -1,6 +1,5 @@
 #[cfg(feature = "phf")]
 extern crate phf_codegen;
-extern crate unicase;
 
 use unicase::UniCase;
 
@@ -9,7 +8,6 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufWriter;
 use std::path::Path;
-
 use std::collections::BTreeMap;
 
 use mime_types::MIME_TYPES;

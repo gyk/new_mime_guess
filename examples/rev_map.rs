@@ -1,5 +1,3 @@
-extern crate new_mime_guess;
-
 fn main() {
 	print_exts("video/*");
 	print_exts("video/x-matroska");

@@ -1,6 +1,6 @@
 use unicase::UniCase;
+use crate::mime_types::MIME_TYPES;
 
-include!("mime_types.rs");
 include!(concat!(env!("OUT_DIR"), "/mime_types_generated.rs"));
 
 #[cfg(feature = "rev-mappings")]

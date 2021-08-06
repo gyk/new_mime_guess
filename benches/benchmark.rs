@@ -1,8 +1,4 @@
-#[macro_use]
-extern crate criterion;
-extern crate new_mime_guess;
-
-use self::criterion::Criterion;
+use criterion::{criterion_group, criterion_main, Criterion};
 
 use new_mime_guess::from_ext;
 

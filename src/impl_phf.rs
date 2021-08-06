@@ -1,5 +1,3 @@
-extern crate phf;
-
 use unicase::UniCase;
 
 include!(concat!(env!("OUT_DIR"), "/mime_types_generated.rs"));
