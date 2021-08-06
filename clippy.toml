@@ -1,0 +1,3 @@
+# avoid-breaking-exported-api = false # only available on nightly for now
+cognitive-complexity-threshold = 15
+msrv = "1.40"

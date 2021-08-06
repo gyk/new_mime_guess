@@ -10,7 +10,7 @@ struct TopLevelExts {
 }
 
 pub fn get_mime_types(ext: &str) -> Option<&'static [&'static str]> {
-	map_lookup(&MIME_TYPES, ext).cloned()
+	map_lookup(&MIME_TYPES, ext).copied()
 }
 
 pub fn get_extensions(toplevel: &str, sublevel: &str) -> Option<&'static [&'static str]> {

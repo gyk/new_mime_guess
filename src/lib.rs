@@ -111,7 +111,7 @@ impl MimeGuess {
 	///
 	/// See [Note: Ordering](#note-ordering) above.
 	pub fn first_raw(&self) -> Option<&'static str> {
-		self.0.get(0).cloned()
+		self.0.get(0).copied()
 	}
 
 	/// Get the first guessed `Mime`, or if the guess is empty, return
@@ -173,7 +173,7 @@ impl MimeGuess {
 	///
 	/// See [Note: Ordering](#note-ordering) above.
 	pub fn iter_raw(&self) -> IterRaw {
-		IterRaw(self.0.iter().cloned())
+		IterRaw(self.0.iter().copied())
 	}
 }
 
@@ -231,7 +231,7 @@ impl ExactSizeIterator for Iter {
 ///
 /// See [Note: Ordering on `MimeGuess`](struct.MimeGuess.html#note-ordering).
 #[derive(Clone, Debug)]
-pub struct IterRaw(iter::Cloned<slice::Iter<'static, &'static str>>);
+pub struct IterRaw(iter::Copied<slice::Iter<'static, &'static str>>);
 
 impl Iterator for IterRaw {
 	type Item = &'static str;
