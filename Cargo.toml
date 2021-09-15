@@ -11,7 +11,7 @@ documentation = "https://docs.rs/new_mime_guess/"
 readme = "README.md"
 exclude = ["*.sh"]
 edition = "2018"
-# rust-version = "1.40"
+# rust-version = "1.40.0"
 
 [features]
 default = ["rev-mappings"]
