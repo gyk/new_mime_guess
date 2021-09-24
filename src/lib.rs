@@ -83,35 +83,28 @@ impl MimeGuess {
 	///
 	/// [`Path::extension()`]: https://doc.rust-lang.org/std/path/struct.Path.html#method.extension
 	pub fn from_path<P: AsRef<Path>>(path: P) -> Self {
-		path.as_ref()
+		path
+			.as_ref()
 			.extension()
 			.and_then(OsStr::to_str)
 			.map_or(Self(&[]), Self::from_ext)
 	}
 
 	/// `true` if the guess did not return any known mappings for the given path or extension.
-	pub fn is_empty(&self) -> bool {
-		self.0.is_empty()
-	}
+	pub fn is_empty(&self) -> bool { self.0.is_empty() }
 
 	/// Get the number of MIME types in the current guess.
-	pub fn count(&self) -> usize {
-		self.0.len()
-	}
+	pub fn count(&self) -> usize { self.0.len() }
 
 	/// Get the first guessed `Mime`, if applicable.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn first(&self) -> Option<Mime> {
-		self.first_raw().map(expect_mime)
-	}
+	pub fn first(&self) -> Option<Mime> { self.first_raw().map(expect_mime) }
 
 	/// Get the first guessed Media Type as a string, if applicable.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn first_raw(&self) -> Option<&'static str> {
-		self.0.get(0).copied()
-	}
+	pub fn first_raw(&self) -> Option<&'static str> { self.0.get(0).copied() }
 
 	/// Get the first guessed `Mime`, or if the guess is empty, return
 	/// [`application/octet-stream`] instead.
@@ -131,67 +124,52 @@ impl MimeGuess {
 	/// [`application/octet-stream`]: https://docs.rs/mime/0.3/mime/constant.APPLICATION_OCTET_STREAM.html
 	/// [rfc7231]: https://tools.ietf.org/html/rfc7231#section-3.1.1.5
 	/// [rfc7578]: https://tools.ietf.org/html/rfc7578#section-4.4
-	pub fn first_or_octet_stream(&self) -> Mime {
-		self.first_or(mime::APPLICATION_OCTET_STREAM)
-	}
+	pub fn first_or_octet_stream(&self) -> Mime { self.first_or(mime::APPLICATION_OCTET_STREAM) }
 
 	/// Get the first guessed `Mime`, or if the guess is empty, return
 	/// [`text/plain`](::mime::TEXT_PLAIN) instead.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn first_or_text_plain(&self) -> Mime {
-		self.first_or(mime::TEXT_PLAIN)
-	}
+	pub fn first_or_text_plain(&self) -> Mime { self.first_or(mime::TEXT_PLAIN) }
 
 	/// Get the first guessed `Mime`, or if the guess is empty, return the given `Mime` instead.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn first_or(&self, default: Mime) -> Mime {
-		self.first().unwrap_or(default)
-	}
+	pub fn first_or(&self, default: Mime) -> Mime { self.first().unwrap_or(default) }
 
 	/// Get the first guessed `Mime`, or if the guess is empty, execute the closure and return its
 	/// result.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
 	pub fn first_or_else<F>(&self, default_fn: F) -> Mime
-		where
-			F: FnOnce() -> Mime,
-	{
+	where
+		F: FnOnce() -> Mime, {
 		self.first().unwrap_or_else(default_fn)
 	}
 
 	/// Get an iterator over the `Mime` values contained in this guess.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn iter(&self) -> Iter {
-		Iter(self.iter_raw().map(expect_mime))
-	}
+	pub fn iter(&self) -> Iter { Iter(self.iter_raw().map(expect_mime)) }
 
 	/// Get an iterator over the raw media-type strings in this guess.
 	///
 	/// See [Note: Ordering](#note-ordering) above.
-	pub fn iter_raw(&self) -> IterRaw {
-		IterRaw(self.0.iter().copied())
-	}
+	pub fn iter_raw(&self) -> IterRaw { IterRaw(self.0.iter().copied()) }
 }
 
 impl IntoIterator for MimeGuess {
 	type Item = Mime;
 	type IntoIter = Iter;
 
-	fn into_iter(self) -> Self::IntoIter {
-		self.iter()
-	}
+	fn into_iter(self) -> Self::IntoIter { self.iter() }
 }
 
 impl<'a> IntoIterator for &'a MimeGuess {
 	type Item = Mime;
 	type IntoIter = Iter;
 
-	fn into_iter(self) -> Self::IntoIter {
-		self.iter()
-	}
+	fn into_iter(self) -> Self::IntoIter { self.iter() }
 }
 
 /// An iterator over the `Mime` types of a `MimeGuess`.
@@ -203,27 +181,19 @@ pub struct Iter(iter::Map<IterRaw, fn(&'static str) -> Mime>);
 impl Iterator for Iter {
 	type Item = Mime;
 
-	fn next(&mut self) -> Option<Self::Item> {
-		self.0.next()
-	}
+	fn next(&mut self) -> Option<Self::Item> { self.0.next() }
 
-	fn size_hint(&self) -> (usize, Option<usize>) {
-		self.0.size_hint()
-	}
+	fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
 impl DoubleEndedIterator for Iter {
-	fn next_back(&mut self) -> Option<Self::Item> {
-		self.0.next_back()
-	}
+	fn next_back(&mut self) -> Option<Self::Item> { self.0.next_back() }
 }
 
 impl FusedIterator for Iter {}
 
 impl ExactSizeIterator for Iter {
-	fn len(&self) -> usize {
-		self.0.len()
-	}
+	fn len(&self) -> usize { self.0.len() }
 }
 
 /// An iterator over the raw media type strings of a `MimeGuess`.
@@ -235,27 +205,19 @@ pub struct IterRaw(iter::Copied<slice::Iter<'static, &'static str>>);
 impl Iterator for IterRaw {
 	type Item = &'static str;
 
-	fn next(&mut self) -> Option<Self::Item> {
-		self.0.next()
-	}
+	fn next(&mut self) -> Option<Self::Item> { self.0.next() }
 
-	fn size_hint(&self) -> (usize, Option<usize>) {
-		self.0.size_hint()
-	}
+	fn size_hint(&self) -> (usize, Option<usize>) { self.0.size_hint() }
 }
 
 impl DoubleEndedIterator for IterRaw {
-	fn next_back(&mut self) -> Option<Self::Item> {
-		self.0.next_back()
-	}
+	fn next_back(&mut self) -> Option<Self::Item> { self.0.next_back() }
 }
 
 impl FusedIterator for IterRaw {}
 
 impl ExactSizeIterator for IterRaw {
-	fn len(&self) -> usize {
-		self.0.len()
-	}
+	fn len(&self) -> usize { self.0.len() }
 }
 
 fn expect_mime(s: &str) -> Mime {
@@ -265,14 +227,10 @@ fn expect_mime(s: &str) -> Mime {
 }
 
 /// Wrapper of [`MimeGuess::from_ext()`](struct.MimeGuess.html#method.from_ext).
-pub fn from_ext(ext: &str) -> MimeGuess {
-	MimeGuess::from_ext(ext)
-}
+pub fn from_ext(ext: &str) -> MimeGuess { MimeGuess::from_ext(ext) }
 
 /// Wrapper of [`MimeGuess::from_path()`](struct.MimeGuess.html#method.from_path).
-pub fn from_path<P: AsRef<Path>>(path: P) -> MimeGuess {
-	MimeGuess::from_path(path)
-}
+pub fn from_path<P: AsRef<Path>>(path: P) -> MimeGuess { MimeGuess::from_path(path) }
 
 /// Get a list of known extensions for a given `Mime`.
 ///
@@ -371,23 +329,15 @@ mod tests {
 			"image/gif".to_string()
 		);
 		assert_eq!(
-			from_path("/path/to/file.gif")
-				.first_or_octet_stream()
-				.to_string(),
+			from_path("/path/to/file.gif").first_or_octet_stream().to_string(),
 			"image/gif".to_string()
 		);
 	}
 
 	#[test]
 	fn test_mime_type_guessing_opt() {
-		assert_eq!(
-			from_ext("gif").first().unwrap().to_string(),
-			"image/gif".to_string()
-		);
-		assert_eq!(
-			from_ext("TXT").first().unwrap().to_string(),
-			"text/plain".to_string()
-		);
+		assert_eq!(from_ext("gif").first().unwrap().to_string(), "image/gif".to_string());
+		assert_eq!(from_ext("TXT").first().unwrap().to_string(), "text/plain".to_string());
 		assert_eq!(from_ext("blahblah").first(), None);
 
 		assert_eq!(

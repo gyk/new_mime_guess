@@ -1,10 +1,10 @@
 use unicase::UniCase;
 
+use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufWriter;
 use std::path::Path;
-use std::collections::BTreeMap;
 
 use mime_types::MIME_TYPES;
 
@@ -20,10 +20,10 @@ fn main() {
 	let mut outfile = BufWriter::new(File::create(dest_path).unwrap());
 
 	#[cfg(feature = "phf-map")]
-		build_forward_map(&mut outfile);
+	build_forward_map(&mut outfile);
 
 	#[cfg(feature = "rev-mappings")]
-		build_rev_map(&mut outfile);
+	build_rev_map(&mut outfile);
 }
 
 // Build forward mappings (ext -> mime type)
@@ -49,17 +49,15 @@ fn build_forward_map<W: Write>(out: &mut W) {
 	}
 
 	for (key, values) in map_entries {
-		forward_map.entry(
-			UniCase::new(key),
-			&format!("&{:?}", values),
-		);
+		forward_map.entry(UniCase::new(key), &format!("&{:?}", values));
 	}
 
 	writeln!(
 		out,
 		"static MIME_TYPES: phf::Map<UniCase<&'static str>, &'static [&'static str]> = \n{};",
 		forward_map.build()
-	).unwrap();
+	)
+	.unwrap();
 }
 
 // Build reverse mappings (mime type -> ext)
@@ -94,7 +92,9 @@ fn build_rev_map<W: Write>(out: &mut W) {
 			top,
 			&format!(
 				"TopLevelExts {{ start: {}, end: {}, subs: {} }}",
-				top_start, top_end, sub_map.build()
+				top_start,
+				top_end,
+				sub_map.build()
 			),
 		);
 	}
@@ -103,7 +103,8 @@ fn build_rev_map<W: Write>(out: &mut W) {
 		out,
 		"static REV_MAPPINGS: phf::Map<UniCase<&'static str>, TopLevelExts> = \n{};",
 		rev_map.build()
-	).unwrap();
+	)
+	.unwrap();
 
 	writeln!(out, "const EXTS: &[&str] = &{:?};", exts).unwrap();
 }
@@ -113,18 +114,26 @@ fn build_rev_map<W: Write>(out: &mut W) {
 	use std::fmt::Write as _;
 
 	macro_rules! unicase_const {
-        ($s:expr) => ({
-            format_args!("{}({:?})", (if $s.is_ascii() {
-                "UniCase::ascii"
-            } else {
-                "UniCase::unicode"
-            }), $s)
-        })
-    }
+		($s:expr) => {{
+			format_args!(
+				"{}({:?})",
+				(if $s.is_ascii() {
+					"UniCase::ascii"
+				} else {
+					"UniCase::unicode"
+				}),
+				$s
+			)
+		}};
+	}
 
 	let dyn_map = get_rev_mappings();
 
-	write!(out, "static REV_MAPPINGS: &[(UniCase<&'static str>, TopLevelExts)] = &[").unwrap();
+	write!(
+		out,
+		"static REV_MAPPINGS: &[(UniCase<&'static str>, TopLevelExts)] = &["
+	)
+	.unwrap();
 
 	let mut exts = Vec::new();
 
@@ -138,11 +147,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
 			exts.extend(sub_exts);
 			let sub_end = exts.len();
 
-			write!(
-				sub_map,
-				"({}, ({}, {})),",
-				unicase_const!(sub), sub_start, sub_end
-			).unwrap();
+			write!(sub_map, "({}, ({}, {})),", unicase_const!(sub), sub_start, sub_end).unwrap();
 		}
 
 		let top_end = exts.len();
@@ -150,8 +155,12 @@ fn build_rev_map<W: Write>(out: &mut W) {
 		write!(
 			out,
 			"({}, TopLevelExts {{ start: {}, end: {}, subs: &[{}] }}),",
-			unicase_const!(top), top_start, top_end, sub_map
-		).unwrap();
+			unicase_const!(top),
+			top_start,
+			top_end,
+			sub_map
+		)
+		.unwrap();
 	}
 
 	writeln!(out, "];").unwrap();

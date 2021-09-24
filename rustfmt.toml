@@ -3,3 +3,4 @@ fn_single_line = true
 hard_tabs = true
 tab_spaces = 2
 newline_style = "Unix"
+ignore = ["src/mime_types.rs"]
