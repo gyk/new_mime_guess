@@ -13,7 +13,7 @@ As of 3.0, the minimum supported Rust version is **1.40**. Additionally, the fun
 mime_guess' 2.0 release have been removed, along with the `pub extern crate mime` declaration, meaning that you can no
 longer `use new_mime_guess::mime`.
 
-The 1original README is preserved below.
+The original README is preserved below.
 
 ---
 
