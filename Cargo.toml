@@ -25,7 +25,8 @@ rev-mappings = []
 [dependencies]
 mime = "0.3.16"
 unicase = "2.6.0"
-bitflags = "~1.2.1" # required to avoid update to 1.3.x, which requires Rust >= 1.46.0
+bitflags = "~1.2.1" # required to avoid update to 1.3.x, which requires Rust >= 1.46
+half = "~1.7.1" # required to avoid update to 1.8.x, which requires Rust >= 1.51
 
 [dependencies.phf]
 version = "~0.10.0"
