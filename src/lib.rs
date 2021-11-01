@@ -143,7 +143,8 @@ impl MimeGuess {
 	/// See [Note: Ordering](#note-ordering) above.
 	pub fn first_or_else<F>(&self, default_fn: F) -> Mime
 	where
-		F: FnOnce() -> Mime, {
+		F: FnOnce() -> Mime,
+	{
 		self.first().unwrap_or_else(default_fn)
 	}
 
