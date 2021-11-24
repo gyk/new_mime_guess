@@ -1,7 +1,7 @@
 use super::{expect_mime, from_ext, from_path, get_mime_extensions_str};
+use crate::mime_types::MIME_TYPES;
 use std::fmt::Debug;
 use std::path::Path;
-use crate::mime_types::MIME_TYPES;
 
 #[test]
 fn check_type_bounds() {
@@ -93,7 +93,11 @@ fn test_get_mime_extensions_str_no_panic_if_bad_mime() {
 fn no_duplicate_mime_types() {
 	let mut exts = Vec::with_capacity(MIME_TYPES.len());
 	for (ext, _) in MIME_TYPES.into_iter() {
-		assert!(!exts.contains(ext), "Duplicate extension found: {} appears more than once in MIME_TYPES.", ext);
+		assert!(
+			!exts.contains(ext),
+			"Duplicate extension found: {} appears more than once in MIME_TYPES.",
+			ext
+		);
 		exts.push(ext);
 	}
 }
