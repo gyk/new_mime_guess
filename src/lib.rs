@@ -64,7 +64,7 @@ impl MimeGuess {
 			return Self(&[]);
 		}
 
-		impl_::get_mime_types(ext).map_or(Self(&[]), |v| Self(v))
+		impl_::get_mime_types(ext).map_or(Self(&[]), Self)
 	}
 
 	/// Guess the MIME type of `path` by its extension (as defined by
