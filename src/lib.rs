@@ -93,10 +93,10 @@ impl MimeGuess {
 	}
 
 	/// `true` if the guess did not return any known mappings for the given path or extension.
-	pub fn is_empty(&self) -> bool { self.0.is_empty() }
+	pub const fn is_empty(&self) -> bool { self.0.is_empty() }
 
 	/// Get the number of MIME types in the current guess.
-	pub fn count(&self) -> usize { self.0.len() }
+	pub const fn count(&self) -> usize { self.0.len() }
 
 	/// Get the first guessed `Mime`, if applicable.
 	///
