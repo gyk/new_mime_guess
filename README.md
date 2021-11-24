@@ -3,6 +3,8 @@ new_mime_guess
 [![Crates.io](https://img.shields.io/crates/v/new_mime_guess.svg)](https://crates.io/crates/new_mime_guess)
 [![Unsafe forbidden](https://img.shields.io/badge/unsafe-forbidden-success.svg?style=flat-square)
 ](https://github.com/rust-secure-code/safety-dance/)
+[![Build status](https://github.com/Lynnesbian/new_mime_guess/actions/workflows/rust.yml/badge.svg)
+](https://github.com/Lynnesbian/new_mime_guess/actions/workflows/rust.yml)
 
 This project is a fork of [mime_guess](https://github.com/abonander/mime_guess). It adds support for many new file
 formats, uses Rust's 2018 edition, and fixes mime_guess' currently disabled `phf-map` feature. It has a few other minor
