@@ -5,3 +5,4 @@ src/mime_types_generated.rs
 *.iml
 *.sh
 Cargo.lock
+test.py
