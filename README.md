@@ -11,10 +11,13 @@ formats, uses Rust's 2018 edition, and fixes mime_guess' currently disabled `phf
 changes, but my main reason for creating it is to fix some gaps/issues I've identified with its MIME/extension
 associations while writing [fif](https://gitlab.com/lynnesbian/fif).
 
-As of 3.0, the minimum supported Rust version is **1.40**. Additionally, the functions marked as deprecated in 
-mime_guess' 2.0 release have been removed, along with the `pub extern crate mime` declaration, meaning that you can 
-no longer `use new_mime_guess::mime`; if you want to use the [`mime`](https://crates.io/crates/mime) crate, you must 
-add it as a direct dependency.
+As of 4.0, the minimum supported Rust version is **1.48**. 3.0 can be used if you require support for Rust 1.40.
+Additionally, as of 3.0, all functions marked as deprecated in mime_guess' 2.0 release have been removed, along with the
+`pub extern crate mime` declaration, meaning that you can no longer `use new_mime_guess::mime`; if you want to use the
+[`mime`](https://crates.io/crates/mime) crate, you must add it as a direct dependency.
+
+See [the changelog](https://github.com/Lynnesbian/new_mime_guess/blob/master/CHANGELOG.md) for more information on
+changes.
 
 The original README is preserved below.
 
