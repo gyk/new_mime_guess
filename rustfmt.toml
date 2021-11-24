@@ -4,3 +4,6 @@ hard_tabs = true
 tab_spaces = 2
 newline_style = "Unix"
 ignore = ["src/mime_types.rs"]
+group_imports = "StdExternalCrate"
+array_width = 100
+fn_call_width = 80

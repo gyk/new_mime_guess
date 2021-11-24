@@ -1,5 +1,3 @@
-use unicase::UniCase;
-
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::prelude::*;
@@ -7,6 +5,7 @@ use std::io::BufWriter;
 use std::path::Path;
 
 use mime_types::MIME_TYPES;
+use unicase::UniCase;
 
 #[path = "src/mime_types.rs"]
 mod mime_types;
@@ -129,11 +128,7 @@ fn build_rev_map<W: Write>(out: &mut W) {
 
 	let dyn_map = get_rev_mappings();
 
-	write!(
-		out,
-		"static REV_MAPPINGS: &[(UniCase<&'static str>, TopLevelExts)] = &["
-	)
-	.unwrap();
+	write!(out, "static REV_MAPPINGS: &[(UniCase<&'static str>, TopLevelExts)] = &[").unwrap();
 
 	let mut exts = Vec::new();
 

@@ -1,5 +1,6 @@
-use crate::mime_types::MIME_TYPES;
 use unicase::UniCase;
+
+use crate::mime_types::MIME_TYPES;
 
 include!(concat!(env!("OUT_DIR"), "/mime_types_generated.rs"));
 

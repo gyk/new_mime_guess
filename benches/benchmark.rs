@@ -1,5 +1,4 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-
 use new_mime_guess::from_ext;
 
 include!("../src/mime_types.rs");

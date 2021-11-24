@@ -1,7 +1,8 @@
-use super::{expect_mime, from_ext, from_path, get_mime_extensions_str};
-use crate::mime_types::MIME_TYPES;
 use std::fmt::Debug;
 use std::path::Path;
+
+use super::{expect_mime, from_ext, from_path, get_mime_extensions_str};
+use crate::mime_types::MIME_TYPES;
 
 #[test]
 fn check_type_bounds() {
@@ -14,14 +15,8 @@ fn check_type_bounds() {
 
 #[test]
 fn test_mime_type_guessing() {
-	assert_eq!(
-		from_ext("gif").first_or_octet_stream().to_string(),
-		"image/gif".to_string()
-	);
-	assert_eq!(
-		from_ext("TXT").first_or_octet_stream().to_string(),
-		"text/plain".to_string()
-	);
+	assert_eq!(from_ext("gif").first_or_octet_stream().to_string(), "image/gif".to_string());
+	assert_eq!(from_ext("TXT").first_or_octet_stream().to_string(), "text/plain".to_string());
 	assert_eq!(
 		from_ext("blahblah").first_or_octet_stream().to_string(),
 		"application/octet-stream".to_string()

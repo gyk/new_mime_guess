@@ -21,12 +21,12 @@
 #[forbid(unsafe_code)]
 mod mime_types;
 
-pub use mime::Mime;
-
 use std::ffi::OsStr;
 use std::iter::FusedIterator;
 use std::path::Path;
 use std::{iter, slice};
+
+pub use mime::Mime;
 
 #[cfg(feature = "phf-map")]
 #[path = "impl_phf.rs"]
