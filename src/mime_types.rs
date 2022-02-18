@@ -1221,7 +1221,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
 	("tsd", &["application/timestamped-data"]),
 	("tsv", &["text/tab-separated-values"]),
 	("ttc", &["font/collection"]),
-	("ttf", &["font/ttf", "application/font-sfnt"]),
+	("ttf", &["font/ttf", "application/x-font-ttf", "application/font-sfnt"]),
 	("ttl", &["text/turtle"]),
 	("ttml", &["application/ttml+xml"]),
 	("tts", &["video/vnd.dlna.mpeg-tts"]),
