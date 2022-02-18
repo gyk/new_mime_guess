@@ -27,7 +27,7 @@ mime = "0.3.16"
 unicase = "2.6.0"
 
 [dependencies.phf]
-version = "~0.10.0"
+version = "~0.10.1"
 features = ["unicase"]
 optional = true
 
