@@ -338,6 +338,7 @@ pub static MIME_TYPES: &[(&str, &[&str])] = &[
 	),
 	("exe.config", &["text/xml"]),
 	("exi", &["application/exi"]),
+	("exr", &["image/x-exr"]),
 	("ext", &["application/vnd.novadigm.ext"]),
 	("ez", &["application/andrew-inset"]),
 	("ez2", &["application/vnd.ezpix-album"]),
